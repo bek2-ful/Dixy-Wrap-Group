@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="389f2501-4942-4354-b76e-8aff16aa9199" name="Changes" comment="" />
+    <list default="true" id="389f2501-4942-4354-b76e-8aff16aa9199" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +30,9 @@
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
+ main
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+ main
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -44,11 +49,27 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+ main
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Dixy-Wrap-Group" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Dixy-Wrap-Group" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+ main
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
   </component>
@@ -63,7 +84,12 @@
       <workItem from="1733082272676" duration="47000" />
       <workItem from="1733084238276" duration="43000" />
       <workItem from="1733084765663" duration="25000" />
+ main
+      <workItem from="1733086560355" duration="456000" />
+      <workItem from="1733087776601" duration="247000" />
+
       <workItem from="1733086560355" duration="1317000" />
+ main
     </task>
     <servers />
   </component>
