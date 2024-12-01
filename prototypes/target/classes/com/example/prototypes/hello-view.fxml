@@ -79,9 +79,9 @@
                <children>
                   <Pane onMouseClicked="#onVoucherClick" prefWidth="146.0">
                      <children>
-                        <VBox layoutX="0.800000011920929" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="vbox_voucher" layoutX="0.800000011920929" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                              <HBox fx:id="hbox_voucher" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="85.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -90,12 +90,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
@@ -121,12 +121,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
@@ -152,12 +152,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
@@ -183,12 +183,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
@@ -214,12 +214,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
@@ -245,12 +245,12 @@
                                     </ImageView>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label text="">
+                                          <Label>
                                              <padding>
                                                 <Insets left="5.0" top="5.0" />
                                              </padding>
