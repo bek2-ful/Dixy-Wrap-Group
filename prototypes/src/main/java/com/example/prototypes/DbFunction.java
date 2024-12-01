@@ -43,6 +43,7 @@ public class DbFunction {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
+                System.out.println(rs.getInt("current_points"));
                 return String.valueOf(rs.getInt("current_points"));
             }
 
