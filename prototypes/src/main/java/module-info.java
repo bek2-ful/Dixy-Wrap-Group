@@ -5,6 +5,7 @@ module com.example.prototypes {
     requires org.controlsfx.controls;
     requires java.sql;
     requires java.sql.rowset;
+    requires org.postgresql.jdbc;
 
     opens com.example.prototypes to javafx.fxml;
     exports com.example.prototypes;
