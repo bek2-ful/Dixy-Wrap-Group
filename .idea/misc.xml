@@ -5,11 +5,18 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Check_In/pom.xml" />
+<<<<<<< HEAD
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+=======
         <option value="$PROJECT_DIR$/prototypes/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+>>>>>>> ea9b8e139603475d41192eaba619339e2ab6daf8
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
