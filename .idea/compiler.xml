@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
+=======
+        <module name="prototypes" />
+>>>>>>> ea9b8e139603475d41192eaba619339e2ab6daf8
         <module name="Check_In" />
       </profile>
     </annotationProcessing>
