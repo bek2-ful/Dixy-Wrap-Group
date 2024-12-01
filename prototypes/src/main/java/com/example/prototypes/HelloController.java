@@ -37,7 +37,7 @@ public class HelloController {
     private Label current_points;
 
     private void display_points() {
-        current_points.setText(db.read_points(conn,"user_points", 1));
+        current_points.setText(db.read_points(conn,"user_points", 0));
     }
 
 
