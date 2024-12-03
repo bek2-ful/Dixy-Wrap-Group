@@ -1,6 +1,8 @@
 package com.example.prototypes;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -8,10 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,9 +24,9 @@ public class HelloController {
     private DbFunction db = new DbFunction();
     private Connection conn;
 
-    String DBNAME = "prototype";
-    String USERNAME = "bek2";
-    String PASSWORD = "1234";
+    String DBNAME = "gamification";
+    String USERNAME = "postgres";
+    String PASSWORD = "fullstack24";
 
     @FXML
     public void initialize() {
@@ -45,12 +44,9 @@ public class HelloController {
     }
 
 
+
     @FXML
     private GridPane gridPane;
-    @FXML
-    private VBox vbox_voucher;
-    @FXML
-    private HBox hbox_voucher;
     private void display_vouchers() {
         List<Voucher> vouchers = db.read_voucher(conn);
 
@@ -58,37 +54,53 @@ public class HelloController {
         int col = 0;
 
         for (Voucher voucher : vouchers) {
-            Pane voucherPane = createVoucherPane(voucher);
-            gridPane.add(voucherPane, col, row);
+            gridPane.add(createVoucherVbox(voucher), col, row);
 
-            col++;
-            if (col == 2) {
-                col = 0;
-                row++;
-            }
+            row++;
         }
     }
 
-    private Pane createVoucherPane(Voucher voucher){
-        vbox_voucher = new VBox();
-        hbox_voucher = new HBox();
+    private VBox createVoucherVbox(Voucher voucher) {
+        ImageView imageView =  new ImageView(new Image("file:" + voucher.getLogo_path()));
+        imageView.setFitHeight(71);
+        imageView.setFitWidth(40);
 
-        ImageView imageView = new ImageView(new Image("file:" + voucher.getLogo_path()));
-        imageView.setFitHeight(85);
-        imageView.setFitWidth(50);
+        VBox details_box = new VBox();
+        details_box.setPadding(new Insets(5));
+        details_box.setAlignment(Pos.CENTER_LEFT);
 
-        VBox detailsBox = new VBox();
-        Label nameLabel = new Label(voucher.getReward());
-        Label pointsLabel = new Label("Points: " + voucher.getPoints_needed());
-        Label companyLabel = new Label(voucher.getCompany());
 
-        detailsBox.getChildren().addAll(nameLabel, pointsLabel, companyLabel);
+        /* the claim text can be horizontal?? fix the position it should be in the middle */
+        Button claim_button = new Button("CLAIM");
+        claim_button.setPrefWidth(60);
+        claim_button.setPrefHeight(30);
+        claim_button.setStyle("-fx-font-size: 12px;" + "-fx-border-color: #040404;");
+        claim_button.setAlignment(Pos.CENTER);
 
-        hbox_voucher.getChildren().addAll(imageView, detailsBox);
+        Label nameLabel = new Label (voucher.getReward());
+        nameLabel.setWrapText(true);
+        nameLabel.setMaxWidth(150);
+        nameLabel.setStyle("-fx-font-size: 15px;");
+
+        Label pointsLabel = new Label("" + voucher.getPoints_needed() + " POINTS");
+        pointsLabel.setStyle("-fx-font-size: 14px;");
+
+        details_box.getChildren().addAll(nameLabel, pointsLabel);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        HBox hbox_voucher = new HBox();
+        hbox_voucher.setSpacing(5);
+        hbox_voucher.setAlignment(Pos.CENTER);
+        hbox_voucher.getChildren().addAll(imageView, details_box, spacer, claim_button);
+
+        VBox vbox_voucher = new VBox();
+        vbox_voucher.setStyle("-fx-border-color: #040404;" + "-fx-background-color: #eee4ba;" + "-fx-border-radius: 5");
+
         vbox_voucher.getChildren().add(hbox_voucher);
 
-        //        pane.setOnMouseClicked(event -> handleVoucherClick(voucher));
-        return new Pane(vbox_voucher);
+        return vbox_voucher;
     }
 
     @FXML

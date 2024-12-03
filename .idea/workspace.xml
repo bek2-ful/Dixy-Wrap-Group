@@ -4,7 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="389f2501-4942-4354-b76e-8aff16aa9199" name="Changes" comment="" />
+    <list default="true" id="389f2501-4942-4354-b76e-8aff16aa9199" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_01.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_02.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prototypes/src/image/tap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Dixy-Wrap-Group.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dixy-Wrap-Group.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2-12-2024.sql" beforeDir="false" afterPath="$PROJECT_DIR$/2-12-2024.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.sql" beforeDir="false" afterPath="$PROJECT_DIR$/file.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/file2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/Functions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/src/main/resources/com/example/prototypes/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/resources/com/example/prototypes/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/DbFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/DbFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/Functions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/module-info.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +63,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/GIT/GitHub/groups-2024/Dixy-Wrap-Group/postgresql-42.6.0.jar",
+    "last_opened_file_path": "C:/sepp/postgresql-42.6.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -44,20 +75,10 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Dixy-Wrap-Group" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Dixy-Wrap-Group" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ikaro\OneDrive\Documents\GitHub\Dixy-Wrap-Group\prototypes\src\image" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
