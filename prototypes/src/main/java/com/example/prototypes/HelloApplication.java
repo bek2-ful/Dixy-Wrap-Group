@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -19,9 +20,15 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+
+        HelloController details = new HelloController();
+        String dbname = details.DBNAME;
+        String user = details.USERNAME;
+        String pass = details.PASSWORD;
+
        launch();
        Functions test = new Functions();
-       test.printPoints(1,"prototype","bek2", "1234");
+       test.printPoints(1,dbname,user, pass);
 
 
     }
