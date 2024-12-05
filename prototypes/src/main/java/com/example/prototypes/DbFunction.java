@@ -1,9 +1,6 @@
 package com.example.prototypes;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,27 +71,29 @@ public class DbFunction {
         }
         return vouchers;
     }
-
-    public String read_transactions (Connection conn) {
+    public List<Transaction> read_transaction (Connection conn) {
+        List<Transaction> transactions = new ArrayList<>();
         Statement statement;
         ResultSet rs = null;
-        String result = null;
-
         try {
-            String query = "SELECT * FROM transaction WHERE user_id = ? ORDER BY date DESC LIMIT 5";
+            String query = "SELECT * FROM transaction WHERE user_id = 1 ORDER BY transaction_date DESC LIMIT 5";
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Date date = rs.getDate("transaction_date");
+                String name = rs.getString("transaction_name");
+                int points_earned = rs.getInt("points_earned");
+                int points_spent = rs.getInt("points_spent");
 
-            while(rs.next()){
-                result = rs.getString("date") + rs.getString("transaction_name" + rs.getString("points_earned"));
+                System.out.println(date + name + points_earned + points_spent);
 
+                transactions.add(new Transaction(date, name, points_earned, points_spent));
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return result;
+        return transactions;
     }
-
 
     public void createTable(Connection conn, String table_name) {
         Statement statement;

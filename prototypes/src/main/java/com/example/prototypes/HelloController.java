@@ -33,6 +33,7 @@ public class HelloController {
         conn = db.connect_to_db(DBNAME, USERNAME, PASSWORD);
         display_vouchers();
         display_points();
+        display_transactions();
 
     }
 
@@ -46,7 +47,7 @@ public class HelloController {
 
 
     @FXML
-    private GridPane gridPane;
+    private GridPane gridPane1;
     private void display_vouchers() {
         List<Voucher> vouchers = db.read_voucher(conn);
 
@@ -54,7 +55,7 @@ public class HelloController {
         int col = 0;
 
         for (Voucher voucher : vouchers) {
-            gridPane.add(createVoucherVbox(voucher), col, row);
+            gridPane1.add(createVoucherVbox(voucher), col, row);
 
             row++;
         }
@@ -74,8 +75,10 @@ public class HelloController {
         Button claim_button = new Button("CLAIM");
         claim_button.setPrefWidth(60);
         claim_button.setPrefHeight(30);
+        claim_button.setPadding(new Insets(10));
         claim_button.setStyle("-fx-font-size: 12px;" + "-fx-border-color: #040404;");
         claim_button.setAlignment(Pos.CENTER);
+        HBox.setMargin(claim_button, new Insets(0,5,0,0));
 
         Label nameLabel = new Label (voucher.getReward());
         nameLabel.setWrapText(true);
@@ -102,6 +105,63 @@ public class HelloController {
 
         return vbox_voucher;
     }
+
+    @FXML
+    private GridPane gridPane2;
+    private void display_transactions() {
+        List<Transaction> transactions = db.read_transaction(conn);
+
+        int row = 0;
+        int col = 0;
+
+        for (Transaction transaction : transactions) {
+            HBox transactionBox = createTransactionBox(transaction);
+            String backgroundColor = (row % 2 == 0) ? "#e8e8e8" : "#f9f9f9";
+            transactionBox.setStyle("-fx-background-color: " + backgroundColor + ";");
+
+            gridPane2.add(transactionBox, col, row);
+
+
+            row++;
+        }
+    }
+
+    private HBox createTransactionBox(Transaction transaction) {
+        VBox details_box = new VBox();
+        details_box.setPadding(new Insets(5));
+        details_box.setAlignment(Pos.CENTER_LEFT);
+
+        Label nameLabel = new Label (transaction.getName());
+        nameLabel.setStyle("-fx-font-size: 16px;");
+
+        Label dateLabel = new Label(transaction.getDate().toString());
+        dateLabel.setStyle("-fx-font-size: 13px;");
+
+        details_box.getChildren().addAll(nameLabel, dateLabel);
+
+        Label earned = new Label("+" + Integer.toString(transaction.getPoints_earned()));
+        earned.setStyle("-fx-font-size: 20px;" + "-fx-alignment: center;");
+        earned.setPrefWidth(40);
+        HBox.setMargin(earned, new Insets(10, 0, 0,0));
+
+
+        Label spent = new Label( "-" + Integer.toString(transaction.getPoints_spent()));
+        spent.setStyle("-fx-font-size: 20px;" + "-fx-alignment:  center");
+        spent.setPrefWidth(50);
+        HBox.setMargin(spent, new Insets(10, 10, 0, 0));
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        HBox hbox_transaction = new HBox();
+        hbox_transaction.setSpacing(10);
+        hbox_transaction.setPadding(new Insets(5));
+        hbox_transaction.getChildren().addAll(details_box, spacer, earned, spent);
+
+        return hbox_transaction;
+
+    }
+
 
     @FXML
     private Button checkInButton;
