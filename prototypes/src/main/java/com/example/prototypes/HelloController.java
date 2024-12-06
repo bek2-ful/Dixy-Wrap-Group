@@ -24,9 +24,9 @@ public class HelloController {
     private DbFunction db = new DbFunction();
     private Connection conn;
 
-    String DBNAME = "prototype2";
-    String USERNAME = "bek2";
-    String PASSWORD = "1234";
+    String DBNAME = "gamification";
+    String USERNAME = "postgres";
+    String PASSWORD = "fullstack24";
 
     @FXML
     public void initialize() {
@@ -63,10 +63,12 @@ public class HelloController {
 
     private VBox createVoucherVbox(Voucher voucher) {
         ImageView imageView =  new ImageView(new Image("file:" + voucher.getLogo_path()));
-        imageView.setFitHeight(71);
-        imageView.setFitWidth(40);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(60);
+        HBox.setMargin(imageView, new Insets(0,0,0,5));
 
         VBox details_box = new VBox();
+        details_box.setMaxWidth(150);
         details_box.setPadding(new Insets(5));
         details_box.setAlignment(Pos.CENTER_LEFT);
 
@@ -76,7 +78,7 @@ public class HelloController {
         claim_button.setPrefWidth(60);
         claim_button.setPrefHeight(30);
         claim_button.setPadding(new Insets(10));
-        claim_button.setStyle("-fx-font-size: 12px;" + "-fx-border-color: #040404;");
+        claim_button.setStyle("-fx-font-size: 11px;" + "-fx-border-color: #040404;");
         claim_button.setAlignment(Pos.CENTER);
         HBox.setMargin(claim_button, new Insets(0,5,0,0));
 
@@ -96,9 +98,11 @@ public class HelloController {
         HBox hbox_voucher = new HBox();
         hbox_voucher.setSpacing(5);
         hbox_voucher.setAlignment(Pos.CENTER);
-        hbox_voucher.getChildren().addAll(imageView, details_box, spacer, claim_button);
+        hbox_voucher.getChildren().addAll(imageView, details_box,spacer, claim_button);
 
         VBox vbox_voucher = new VBox();
+        vbox_voucher.setPrefHeight(90);
+        vbox_voucher.setAlignment(Pos.CENTER);
         vbox_voucher.setStyle("-fx-border-color: #040404;" + "-fx-background-color: #eee4ba;" + "-fx-border-radius: 5");
 
         vbox_voucher.getChildren().add(hbox_voucher);
