@@ -1,43 +1,45 @@
 package com.example.prototypes;
 
-import javax.sql.rowset.CachedRowSet;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Functions {
 
-    LocalDate localDate = LocalDate.now();
-
     public void addPoints (int userId, String dbname, String username, String password) {
-        String add = "INSERT INTO transaction (user_id, transaction_date, points_earned, transaction_name) VALUES (?, ?, ?, ?)";
+        String add = "UPDATE user_points SET current_points = current_points + 50 WHERE user_id = ?";
+        String insertTrans = "INSERT INTO transaction (user_id, points_earned, points_spent, transaction_name) VALUES (?, ?, ?, ?)";
 
+//        LocalDate localdate = LocalDate.now();
+//        String date = localdate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         DbFunction functions = new DbFunction();
 
-        try (Connection conn = functions.connect_to_db(dbname, username, password)) {
+        try (Connection conn = functions.connect_to_db(dbname, username, password);
+        PreparedStatement stmt = conn.prepareStatement(insertTrans)) {
+            stmt.setInt(1,userId);
 
-            try (PreparedStatement addStatement = conn.prepareStatement(add)) {
-                addStatement.setInt(2, userId);
-                addStatement.setDate(3, java.sql.Date.valueOf(localDate));
-                addStatement.setInt(5, 50);
-                addStatement.setString(7, "Checked-In");
+            stmt.setInt(1, userId);
+            //stmt.setDate(3, Date.valueOf(date));// User ID
+            //stmt.setTimestamp(2, currentTime); // Transaction date and time
+            stmt.setInt(2, 50);            // Points earned
+            stmt.setInt(3, 0);             // Points spent
+            stmt.setString(4, "Checked In"); // Transaction name
 
-                int rowInserted = addStatement.executeUpdate();
+            int rowsUpdated = stmt.executeUpdate();
 
-                if (rowInserted == 1) {
-                    System.out.println("Transaction successful");
-                } else {
-                    System.out.println("Transaction failed");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (rowsUpdated > 0) {
+                System.out.println("Points added");
+            } else {
+                System.out.println("No points were added");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void pointsToTransaction (int userId, String dbname, String username, String password) {
 
     }
 
