@@ -5,36 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="389f2501-4942-4354-b76e-8aff16aa9199" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_02.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prototypes/src/image/tap.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Dixy-Wrap-Group.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dixy-Wrap-Group.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2-12-2024.sql" beforeDir="false" afterPath="$PROJECT_DIR$/2-12-2024.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file.sql" beforeDir="false" afterPath="$PROJECT_DIR$/file.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/file2.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/java/com/example/prototypes/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/src/main/resources/com/example/prototypes/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/src/main/resources/com/example/prototypes/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/DbFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/DbFunction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/HelloController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/com/example/prototypes/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototypes/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/prototypes/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +44,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -102,6 +77,7 @@
       <workItem from="1733086560355" duration="456000" />
       <workItem from="1733087776601" duration="247000" />
       <workItem from="1733086560355" duration="1317000" />
+      <workItem from="1733233701469" duration="4290000" />
     </task>
     <servers />
   </component>
