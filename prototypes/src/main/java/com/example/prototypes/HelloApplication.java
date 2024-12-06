@@ -27,9 +27,6 @@ public class HelloApplication extends Application {
         String pass = details.PASSWORD;
 
        launch();
-       Functions test = new Functions();
-       //test.printPoints(1,dbname,user, pass);
-
 
     }
 }

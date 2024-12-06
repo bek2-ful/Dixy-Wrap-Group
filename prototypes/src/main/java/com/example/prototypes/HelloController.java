@@ -24,9 +24,9 @@ public class HelloController {
     private DbFunction db = new DbFunction();
     private Connection conn;
 
-    String DBNAME = "gamification";
-    String USERNAME = "postgres";
-    String PASSWORD = "fullstack24";
+    String DBNAME = "prototype2";
+    String USERNAME = "bek2";
+    String PASSWORD = "1234";
 
     @FXML
     public void initialize() {
@@ -171,11 +171,11 @@ public class HelloController {
         checkInButton.setText("Checked In");
         checkInButton.setDisable(true);
 
-        Functions add = new Functions();
-        add.addPoints(1, DBNAME, USERNAME, PASSWORD);
+        db.addPoints(conn,1, DBNAME, USERNAME, PASSWORD);
         current_points.setText(db.read_points(conn,"user_points", 1));
         // Call the method to schedule enabling the button at midnight
         scheduleMidnightEnable();
+        display_transactions();
         // call the db function that
     }
 
