@@ -24,7 +24,7 @@ public class Functions {
             //stmt.setTimestamp(2, currentTime); // Transaction date and time
             stmt.setInt(2, 50);            // Points earned
             stmt.setInt(3, 0);             // Points spent
-            stmt.setString(4, "Checked In"); // Transaction name
+            stmt.setString(4, "Check-In"); // Transaction name
 
             int rowsUpdated = stmt.executeUpdate();
 
