@@ -100,8 +100,25 @@ public class HelloController {
 
         VBox vbox_voucher = new VBox();
         vbox_voucher.setStyle("-fx-border-color: #040404;" + "-fx-background-color: #eee4ba;" + "-fx-border-radius: 5");
-
         vbox_voucher.getChildren().add(hbox_voucher);
+
+//        claim_button.setOnAction(event -> {
+//            boolean success = db.redeemVoucher(conn, 1, 1, DBNAME, USERNAME, PASSWORD);
+//
+//            if (success) {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Voucher Claimed");
+//                alert.setHeaderText(null);
+//                alert.setContentText("You have successfully redeem" + voucher.getReward() + "!");
+//                alert.showAndWait();
+//            } else {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Insufficient Points");
+//                alert.setHeaderText(null);
+//                alert.setContentText("Insufficient Points!");
+//                alert.showAndWait();
+//            }
+//        });
 
         return vbox_voucher;
     }

@@ -56,16 +56,17 @@ public class DbFunction {
         Statement statement;
         ResultSet rs = null;
         try {
-            String query = "SELECT reward, points_needed, company, logo_path FROM voucher";
+            String query = "SELECT voucher_id, reward, points_needed, company, logo_path FROM voucher";
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
+                int voucher_id = rs.getInt("voucher_id");
                 String reward = rs.getString("reward");
                 int points_needed = rs.getInt("points_needed");
                 String company = rs.getString("company");
                 String logo_path = rs.getString("logo_path");
 
-                vouchers.add(new Voucher(reward,points_needed,company,logo_path));
+                vouchers.add(new Voucher(voucher_id,reward,points_needed,company,logo_path));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -99,7 +100,6 @@ public class DbFunction {
     public void addPoints (Connection conn, int userId, String dbname, String username, String password) {
 
         try {
-            String add = "UPDATE user_points SET current_points = current_points + 50 WHERE user_id = ?";
             String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
 
             Date currentDate = new Date(System.currentTimeMillis());
@@ -120,6 +120,60 @@ public class DbFunction {
                 System.out.println("Points added");
             } else {
                 System.out.println("No points were added");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void redeemVoucher (Connection conn, int userId, int voucherId, String dbname, String username, String password) {
+
+        try {
+            String userPoint = "SELECT current_points FROM user_points WHERE user_id = ?";
+            String voucherPoint = "SELECT points_needed FROM voucher WHERE voucher_id = ?";
+            String updateUser = "UPDATE user_points SET current_points = current_points - ? WHERE user_id = ?";
+
+            PreparedStatement userStmt = conn.prepareStatement(userPoint);
+
+            int currentPoints = 0;
+            userStmt.setInt(1, userId);
+            try (ResultSet rs = userStmt.executeQuery()) {
+                if (rs.next()) {
+                    currentPoints = rs.getInt("current_points");
+                } else {
+                    System.out.println("User not found");
+                    return;
+                }
+            }
+
+            PreparedStatement voucherStmt = conn.prepareStatement(voucherPoint);
+
+            int voucherPoints = 0;
+            voucherStmt.setInt(1, voucherId);
+            try ( ResultSet rs = voucherStmt.executeQuery()) {
+                if (rs.next()) {
+                    voucherPoints = rs.getInt("points_needed");
+                } else {
+                    System.out.println("Voucher not found");
+                    return;
+                }
+            }
+
+            if (currentPoints >= voucherPoints) {
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateUser)) {
+                    updateStmt.setInt(1, voucherPoints);
+                    updateStmt.setInt(2, userId);
+
+                    int rowsUpdated = updateStmt.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        System.out.println("Voucher redeemed!");
+                    } else {
+                        System.out.println("Failed to redeem voucher!");
+                    }
+                }
+            } else {
+                System.out.println("Not enough points!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
