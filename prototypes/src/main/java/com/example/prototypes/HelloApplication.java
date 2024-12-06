@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 360, 640);
-        stage.setTitle("Hello");
+        stage.setTitle("SSH APP - Points Page");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -28,7 +28,7 @@ public class HelloApplication extends Application {
 
        launch();
        Functions test = new Functions();
-       test.printPoints(1,dbname,user, pass);
+       //test.printPoints(1,dbname,user, pass);
 
 
     }
