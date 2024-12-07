@@ -31,5 +31,7 @@ public class Voucher {
         return logo_path;
     }
 
+    public int getVoucherId() {return voucherId;}
+
 
 }
