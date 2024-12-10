@@ -15,11 +15,7 @@ public class DbFunction {
     * display transaction
     *
     * */
-
-    Date currentDate = new Date(System.currentTimeMillis());
-    Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
-
-
+    
     public Connection connect_to_db(String dbname, String username, String password) {
         Connection conn = null;
         try {
@@ -108,6 +104,9 @@ public class DbFunction {
             String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(insertTrans);
 
+            Date currentDate = new Date(System.currentTimeMillis());
+            Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
+
             stmt.setInt(1, userId);
             stmt.setDate(2, currentDate);// User ID
             stmt.setTimestamp(3, currentTime); // Transaction date and time
@@ -167,6 +166,8 @@ public class DbFunction {
             }
 
             if (currentPoints >= voucherPoints) {
+                Date currentDate = new Date(System.currentTimeMillis());
+                Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
                 try (PreparedStatement insertStmt = conn.prepareStatement(insertTrans)) {
                     insertStmt.setInt(1, userId);
                     insertStmt.setDate(2, currentDate);// User ID
