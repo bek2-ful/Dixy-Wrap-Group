@@ -25,7 +25,7 @@ public class HelloController {
 
     String DBNAME = "gamification";
     String USERNAME = "postgres";
-    String PASSWORD = "5133";
+    String PASSWORD = "fullstack24";
 
     @FXML
     public void initialize() {
@@ -138,8 +138,9 @@ public class HelloController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Voucher Claimed");
                 alert.setHeaderText(null);
-                alert.setContentText("You have successfully redeem" + voucher.getReward() + "!");
+                alert.setContentText("You have successfully redeem " + voucher.getReward() + "!");
                 alert.showAndWait();
+                display_transactions();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Insufficient Points");
@@ -155,6 +156,7 @@ public class HelloController {
     @FXML
     private GridPane gridPane2;
     private void display_transactions() {
+        gridPane2.getChildren().clear();
         List<Transaction> transactions = db.read_transaction(conn);
 
         int row = 0;

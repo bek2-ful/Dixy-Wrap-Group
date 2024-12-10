@@ -83,7 +83,7 @@ public class DbFunction {
         Statement statement;
         ResultSet rs = null;
         try {
-            String query = "SELECT * FROM transaction WHERE user_id = 1 ORDER BY transaction_date DESC LIMIT 5";
+            String query = "SELECT * FROM transaction WHERE user_id = 1 ORDER BY transaction_id DESC LIMIT 5";
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
