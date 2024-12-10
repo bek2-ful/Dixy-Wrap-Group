@@ -25,7 +25,7 @@ public class HelloController {
 
     String DBNAME = "gamification";
     String USERNAME = "postgres";
-    String PASSWORD = "fullstack24";
+    String PASSWORD = "5133";
 
     @FXML
     public void initialize() {
