@@ -16,7 +16,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
 import java.sql.Connection;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -26,7 +25,7 @@ public class HelloController {
 
     String DBNAME = "gamification";
     String USERNAME = "postgres";
-    String PASSWORD = "fullstack24";
+    String PASSWORD = "5133";
 
     @FXML
     public void initialize() {
@@ -131,23 +130,24 @@ public class HelloController {
                               "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 2);");
         vbox_voucher.getChildren().add(hbox_voucher);
 
-//        claim_button.setOnAction(event -> {
-//            boolean success = db.redeemVoucher(conn, 1, 1, DBNAME, USERNAME, PASSWORD);
-//
-//            if (success) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Voucher Claimed");
-//                alert.setHeaderText(null);
-//                alert.setContentText("You have successfully redeem" + voucher.getReward() + "!");
-//                alert.showAndWait();
-//            } else {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Insufficient Points");
-//                alert.setHeaderText(null);
-//                alert.setContentText("Insufficient Points!");
-//                alert.showAndWait();
-//            }
-//        });
+        claim_button.setOnAction(event -> {
+            boolean success = db.redeemVoucher(conn, 1, voucher.getVoucherId(), DBNAME, USERNAME, PASSWORD);
+            current_points.setText(db.read_points(conn,"user_points", 1));
+
+            if (success) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Voucher Claimed");
+                alert.setHeaderText(null);
+                alert.setContentText("You have successfully redeem" + voucher.getReward() + "!");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Insufficient Points");
+                alert.setHeaderText(null);
+                alert.setContentText("Insufficient Points!");
+                alert.showAndWait();
+            }
+        });
 
         return vbox_voucher;
     }

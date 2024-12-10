@@ -15,6 +15,11 @@ public class DbFunction {
     * display transaction
     *
     * */
+
+    Date currentDate = new Date(System.currentTimeMillis());
+    Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
+
+
     public Connection connect_to_db(String dbname, String username, String password) {
         Connection conn = null;
         try {
@@ -101,11 +106,7 @@ public class DbFunction {
 
         try {
             String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
-
-            Date currentDate = new Date(System.currentTimeMillis());
-            Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
             PreparedStatement stmt = conn.prepareStatement(insertTrans);
-
 
             stmt.setInt(1, userId);
             stmt.setDate(2, currentDate);// User ID
@@ -127,58 +128,91 @@ public class DbFunction {
 
     }
 
-    public void redeemVoucher (Connection conn, int userId, int voucherId, String dbname, String username, String password) {
+    public boolean redeemVoucher (Connection conn, int userId, int voucherId, String dbname, String username, String password) {
+
+        String userPoint = "SELECT current_points FROM user_points WHERE user_id = ?";
+        String voucherPoint = "SELECT points_needed FROM voucher WHERE voucher_id = ?";
+        String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
+        String updateUserQuery = "UPDATE user_points SET current_points = current_points - ? WHERE user_id = ?";
+
+        boolean success = false;
 
         try {
-            String userPoint = "SELECT current_points FROM user_points WHERE user_id = ?";
-            String voucherPoint = "SELECT points_needed FROM voucher WHERE voucher_id = ?";
-            String updateUser = "UPDATE user_points SET current_points = current_points - ? WHERE user_id = ?";
+            conn.setAutoCommit(false);
 
-            PreparedStatement userStmt = conn.prepareStatement(userPoint);
-
-            int currentPoints = 0;
-            userStmt.setInt(1, userId);
-            try (ResultSet rs = userStmt.executeQuery()) {
-                if (rs.next()) {
-                    currentPoints = rs.getInt("current_points");
-                } else {
-                    System.out.println("User not found");
-                    return;
+            int currentPoints;
+            try (PreparedStatement userStmt = conn.prepareStatement(userPoint)) {
+                userStmt.setInt(1, userId);
+                try (ResultSet rs = userStmt.executeQuery()) {
+                    if (rs.next()) {
+                        currentPoints = rs.getInt("current_points");
+                    } else {
+                        System.out.println("User not found");
+                        return false;
+                    }
                 }
             }
 
-            PreparedStatement voucherStmt = conn.prepareStatement(voucherPoint);
+            int voucherPoints;
+            try (PreparedStatement voucherStmt = conn.prepareStatement(voucherPoint)) {
 
-            int voucherPoints = 0;
-            voucherStmt.setInt(1, voucherId);
-            try ( ResultSet rs = voucherStmt.executeQuery()) {
-                if (rs.next()) {
-                    voucherPoints = rs.getInt("points_needed");
-                } else {
-                    System.out.println("Voucher not found");
-                    return;
+                voucherStmt.setInt(1, voucherId);
+                try (ResultSet rs = voucherStmt.executeQuery()) {
+                    if (rs.next()) {
+                        voucherPoints = rs.getInt("points_needed");
+                    } else {
+                        System.out.println("Voucher not found");
+                        return false;
+                    }
                 }
             }
 
             if (currentPoints >= voucherPoints) {
-                try (PreparedStatement updateStmt = conn.prepareStatement(updateUser)) {
+
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateUserQuery)) {
                     updateStmt.setInt(1, voucherPoints);
                     updateStmt.setInt(2, userId);
-
                     int rowsUpdated = updateStmt.executeUpdate();
                     if (rowsUpdated > 0) {
-                        System.out.println("Voucher redeemed!");
+
+                        try (PreparedStatement insertStmt = conn.prepareStatement(insertTrans)) {
+                            insertStmt.setInt(1, userId);
+                            insertStmt.setDate(2, currentDate);// User ID
+                            insertStmt.setTimestamp(3, currentTime); // Transaction date and time
+                            insertStmt.setInt(4, 0);            // Points earned
+                            insertStmt.setInt(5, voucherPoints);             // Points spent
+                            insertStmt.setString(6, "Voucher Redeemed"); // Transaction name
+                            insertStmt.executeUpdate();
+                        }
+                        conn.commit(); // Commit transaction
+                        success = true;
+                        System.out.println("Voucher redeemed successfully!");
+
                     } else {
-                        System.out.println("Failed to redeem voucher!");
+                        System.out.println("Not enough points to redeem the voucher.");
+                        conn.rollback();
                     }
                 }
             } else {
-                System.out.println("Not enough points!");
+                System.out.println("Not enough points");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Rollback transaction on error
+                    System.out.println("Transaction rolled back.");
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+        } finally {
+            try {
+                conn.setAutoCommit(true); // Reset auto-commit
+            } catch (SQLException resetEx) {
+                resetEx.printStackTrace();
+            }
         }
-
+        return success;
     }
-
 }
