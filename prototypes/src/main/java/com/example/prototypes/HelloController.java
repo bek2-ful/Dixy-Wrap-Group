@@ -73,22 +73,42 @@ public class HelloController {
         details_box.setAlignment(Pos.CENTER_LEFT);
 
 
-        /* the claim text can be horizontal?? fix the position it should be in the middle */
         Button claim_button = new Button("CLAIM");
         claim_button.setPrefWidth(60);
         claim_button.setPrefHeight(30);
         claim_button.setPadding(new Insets(10));
-        claim_button.setStyle("-fx-font-size: 11px;" + "-fx-border-color: #040404;");
+        claim_button.setStyle("-fx-font-size: 11px;" +
+                              "-fx-border-color: #cccccc;" +
+                              "-fx-font-family: Tahoma;" +
+                              "-fx-font-weight: bold;" +
+                              "-fx-background-color: linear-gradient(#ffb366, #ff5050);" +
+                              "-fx-border-radius: 10;" +
+                              "-fx-background-radius: 10;");
         claim_button.setAlignment(Pos.CENTER);
         HBox.setMargin(claim_button, new Insets(0,5,0,0));
+
+        claim_button.setOnMouseEntered(e ->
+                claim_button.setStyle("-fx-background-color: linear-gradient(#ff8000, #ff1a1a);" +
+                        "-fx-text-fill: black;" +
+                        "-fx-border-radius: 10;" +
+                        "-fx-background-radius: 10;")
+        );
+
+        claim_button.setOnMouseExited(e ->
+                claim_button.setStyle("-fx-background-color: linear-gradient(#ffb366, #ff5050);" +
+                        "-fx-text-fill: black;" +
+                        "-fx-border-radius: 10;" +
+                        "-fx-background-radius: 10;")
+        );
+
 
         Label nameLabel = new Label (voucher.getReward());
         nameLabel.setWrapText(true);
         nameLabel.setMaxWidth(150);
-        nameLabel.setStyle("-fx-font-size: 15px;");
+        nameLabel.setStyle("-fx-font-size: 14px;" + "-fx-font-weight: bold;" + "-fx-font-family: Tahoma;");
 
         Label pointsLabel = new Label("" + voucher.getPoints_needed() + " POINTS");
-        pointsLabel.setStyle("-fx-font-size: 14px;");
+        pointsLabel.setStyle("-fx-font-size: 14px;" + "-fx-font-family: Tahoma;");
 
         details_box.getChildren().addAll(nameLabel, pointsLabel);
 
@@ -101,9 +121,14 @@ public class HelloController {
         hbox_voucher.getChildren().addAll(imageView, details_box,spacer, claim_button);
 
         VBox vbox_voucher = new VBox();
+//        vbox_voucher.setSpacing(10);
         vbox_voucher.setPrefHeight(90);
         vbox_voucher.setAlignment(Pos.CENTER);
-        vbox_voucher.setStyle("-fx-border-color: #040404;" + "-fx-background-color: #eee4ba;" + "-fx-border-radius: 5");
+        vbox_voucher.setStyle("-fx-border-color: #cccccc;" +
+                              "-fx-background-color: #ffffff;" +
+                              "-fx-border-radius: 10;" +
+                              "-fx-background-radius: 10;" +
+                              "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 2);");
         vbox_voucher.getChildren().add(hbox_voucher);
 
 //        claim_button.setOnAction(event -> {
@@ -153,21 +178,21 @@ public class HelloController {
         details_box.setAlignment(Pos.CENTER_LEFT);
 
         Label nameLabel = new Label (transaction.getName());
-        nameLabel.setStyle("-fx-font-size: 16px;");
+        nameLabel.setStyle("-fx-font-size: 16px;" + "-fx-font-family: Tahoma;");
 
         Label dateLabel = new Label(transaction.getDate().toString());
-        dateLabel.setStyle("-fx-font-size: 13px;");
+        dateLabel.setStyle("-fx-font-size: 13px;" + "-fx-font-family: Tahoma;");
 
         details_box.getChildren().addAll(nameLabel, dateLabel);
 
         Label earned = new Label("+" + Integer.toString(transaction.getPoints_earned()));
-        earned.setStyle("-fx-font-size: 20px;" + "-fx-alignment: center;");
+        earned.setStyle("-fx-font-size: 20px;" + "-fx-alignment: center;" + "-fx-font-family: Tahoma;");
         earned.setPrefWidth(40);
         HBox.setMargin(earned, new Insets(10, 0, 0,0));
 
 
         Label spent = new Label( "-" + Integer.toString(transaction.getPoints_spent()));
-        spent.setStyle("-fx-font-size: 20px;" + "-fx-alignment:  center");
+        spent.setStyle("-fx-font-size: 20px;" + "-fx-alignment:  center;" + "-fx-font-family: Tahoma;");
         spent.setPrefWidth(50);
         HBox.setMargin(spent, new Insets(10, 10, 0, 0));
 
