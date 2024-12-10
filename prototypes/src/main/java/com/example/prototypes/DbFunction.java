@@ -133,7 +133,6 @@ public class DbFunction {
         String userPoint = "SELECT current_points FROM user_points WHERE user_id = ?";
         String voucherPoint = "SELECT points_needed FROM voucher WHERE voucher_id = ?";
         String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
-        String updateUserQuery = "UPDATE user_points SET current_points = current_points - ? WHERE user_id = ?";
 
         boolean success = false;
 
@@ -168,31 +167,18 @@ public class DbFunction {
             }
 
             if (currentPoints >= voucherPoints) {
-
-                try (PreparedStatement updateStmt = conn.prepareStatement(updateUserQuery)) {
-                    updateStmt.setInt(1, voucherPoints);
-                    updateStmt.setInt(2, userId);
-                    int rowsUpdated = updateStmt.executeUpdate();
-                    if (rowsUpdated > 0) {
-
-                        try (PreparedStatement insertStmt = conn.prepareStatement(insertTrans)) {
-                            insertStmt.setInt(1, userId);
-                            insertStmt.setDate(2, currentDate);// User ID
-                            insertStmt.setTimestamp(3, currentTime); // Transaction date and time
-                            insertStmt.setInt(4, 0);            // Points earned
-                            insertStmt.setInt(5, voucherPoints);             // Points spent
-                            insertStmt.setString(6, "Voucher Redeemed"); // Transaction name
-                            insertStmt.executeUpdate();
-                        }
-                        conn.commit(); // Commit transaction
-                        success = true;
-                        System.out.println("Voucher redeemed successfully!");
-
-                    } else {
-                        System.out.println("Not enough points to redeem the voucher.");
-                        conn.rollback();
-                    }
+                try (PreparedStatement insertStmt = conn.prepareStatement(insertTrans)) {
+                    insertStmt.setInt(1, userId);
+                    insertStmt.setDate(2, currentDate);// User ID
+                    insertStmt.setTimestamp(3, currentTime); // Transaction date and time
+                    insertStmt.setInt(4, 0);            // Points earned
+                    insertStmt.setInt(5, voucherPoints);             // Points spent
+                    insertStmt.setString(6, "Voucher Redeemed"); // Transaction name
+                    insertStmt.executeUpdate();
                 }
+                conn.commit(); // Commit transaction
+                success = true;
+                System.out.println("Voucher redeemed successfully!");
             } else {
                 System.out.println("Not enough points");
             }
@@ -206,6 +192,7 @@ public class DbFunction {
                     rollbackEx.printStackTrace();
                 }
             }
+
         } finally {
             try {
                 conn.setAutoCommit(true); // Reset auto-commit
