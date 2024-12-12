@@ -8,13 +8,19 @@ import java.util.List;
 
 public class DbFunctionTest {
 
+    //Details
+    HelloController details = new HelloController();
+    String dbname = details.DBNAME;
+    String username = details.USERNAME;
+    String password = details.PASSWORD;
+
     DbFunction db = new DbFunction();
-    Connection conn = db.connect_to_db("gamification", "postgres", "fullstack24");
+    Connection conn = db.connect_to_db(dbname, username, password);
 
     // Test 1: Database Connection Test
     @Test
     public void testConnection() {
-        Connection conn = db.connect_to_db("gamification", "postgres", "fullstack24");
+        Connection conn = db.connect_to_db(dbname, username, password);
         assertNotNull(conn, "Connection should be established");
     }
 
