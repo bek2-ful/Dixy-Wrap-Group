@@ -7,15 +7,7 @@ import java.sql.Date;
 
 public class DbFunction {
 
-    /* function needed to get from database
-    *  current point from user_points table
-    * voucher from voucher id
-    * claim voucher
-    * points deduction and points addition
-    * display transaction
-    *
-    * */
-    
+    // Function to connect to database
     public Connection connect_to_db(String dbname, String username, String password) {
         Connection conn = null;
         try {
@@ -33,7 +25,7 @@ public class DbFunction {
     }
 
 
-    // consider if still nak kena guna the tablename and id since it will all be the same table and id
+    // Function to read user current points from database
     public String read_points(Connection conn, String table_name, int user_id) {
         Statement statement;
         ResultSet rs = null;
@@ -52,6 +44,7 @@ public class DbFunction {
         return "0";
     }
 
+    // Function to read all voucher from the database
     public List<Voucher> read_voucher (Connection conn) {
         List<Voucher> vouchers = new ArrayList<>();
         Statement statement;
@@ -74,6 +67,8 @@ public class DbFunction {
         }
         return vouchers;
     }
+
+    //Function to read 5 recent transactions from database
     public List<Transaction> read_transaction (Connection conn) {
         List<Transaction> transactions = new ArrayList<>();
         Statement statement;
@@ -97,8 +92,8 @@ public class DbFunction {
     }
 
 
-
-    public void addPoints (Connection conn, int userId, String dbname, String username, String password) {
+    // Function to add user's points when checked-in. For each check in the user will be rewarded with 50 points
+    public void addPoints (Connection conn, int userId) {
 
         try {
             String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
@@ -127,11 +122,15 @@ public class DbFunction {
 
     }
 
-    public boolean redeemVoucher (Connection conn, int userId, int voucherId, String dbname, String username, String password) {
+    // Function to add a new row in transaction table everytime user redeem voucher.
+    // The insertion of new row will trigger the update_points_function to calculate the user's current points
+
+    public boolean redeemVoucher (Connection conn, int userId, int voucherId) {
 
         String userPoint = "SELECT current_points FROM user_points WHERE user_id = ?";
         String voucherPoint = "SELECT points_needed FROM voucher WHERE voucher_id = ?";
         String insertTrans = "INSERT INTO transaction (user_id,transaction_date, transaction_time, points_earned, points_spent, transaction_name) VALUES (?,?,?, ?, ?, ?)";
+        String addCounter = "UPDATE voucher SET counter = counter + 1 WHERE voucher_id = ?";
 
         boolean success = false;
 
@@ -166,12 +165,25 @@ public class DbFunction {
             }
 
             if (currentPoints >= voucherPoints) {
+                PreparedStatement stmt = conn.prepareStatement(addCounter);
+
+                stmt.setInt(1, voucherId);
+
+                int counterUpdated = stmt.executeUpdate();
+
+                if (counterUpdated > 0) {
+                    System.out.println("Voucher counter updated");
+                } else {
+                    System.out.println("Fail to update voucher's counter");
+                }
+
                 Date currentDate = new Date(System.currentTimeMillis());
                 Timestamp currentTime  = new Timestamp(System.currentTimeMillis());
                 try (PreparedStatement insertStmt = conn.prepareStatement(insertTrans)) {
-                    insertStmt.setInt(1, userId);
-                    insertStmt.setDate(2, currentDate);// User ID
-                    insertStmt.setTimestamp(3, currentTime); // Transaction date and time
+
+                    insertStmt.setInt(1, userId); // User ID
+                    insertStmt.setDate(2, currentDate); // Transaction date
+                    insertStmt.setTimestamp(3, currentTime); // Transaction time
                     insertStmt.setInt(4, 0);            // Points earned
                     insertStmt.setInt(5, voucherPoints);             // Points spent
                     insertStmt.setString(6, "Voucher Redeemed"); // Transaction name

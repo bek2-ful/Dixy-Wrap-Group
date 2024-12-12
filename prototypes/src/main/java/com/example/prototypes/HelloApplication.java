@@ -15,18 +15,14 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 360, 640);
         stage.setTitle("SSH APP - Points Page");
         stage.setScene(scene);
+
+        // This is set to false to mimic phone's size
+
         stage.setResizable(false);
         stage.show();
     }
 
     public static void main(String[] args) {
-
-        HelloController details = new HelloController();
-        String dbname = details.DBNAME;
-        String user = details.USERNAME;
-        String pass = details.PASSWORD;
-
        launch();
-
     }
 }

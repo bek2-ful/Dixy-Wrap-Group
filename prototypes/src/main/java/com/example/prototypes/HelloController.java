@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -23,6 +21,7 @@ public class HelloController {
     private DbFunction db = new DbFunction();
     private Connection conn;
 
+    // Credentials needed to establish connection with database
     String DBNAME = "gamification";
     String USERNAME = "postgres";
     String PASSWORD = "fullstack24";
@@ -39,12 +38,14 @@ public class HelloController {
     @FXML
     private Label current_points;
 
+    // Function to display user's current points
     private void display_points() {
+
         current_points.setText(db.read_points(conn,"user_points", 1));
     }
 
 
-
+    // Function to display vouchers by using GridPane as the layout
     @FXML
     private GridPane gridPane1;
     private void display_vouchers() {
@@ -60,6 +61,8 @@ public class HelloController {
         }
     }
 
+    // Function to create each VBox to be put in the gridPane
+    // One Vbox for each voucher
     private VBox createVoucherVbox(Voucher voucher) {
         ImageView imageView =  new ImageView(new Image("file:" + voucher.getLogo_path()));
         imageView.setFitHeight(50);
@@ -88,14 +91,18 @@ public class HelloController {
 
         claim_button.setOnMouseEntered(e ->
                 claim_button.setStyle("-fx-background-color: linear-gradient(#ff8000, #ff1a1a);" +
-                        "-fx-text-fill: black;" +
+                        "-fx-font-family: Tahoma;" +
+                        "-fx-font-size: 11px;" +
+                        "-fx-font-weight: bold;" +
                         "-fx-border-radius: 10;" +
                         "-fx-background-radius: 10;")
         );
 
         claim_button.setOnMouseExited(e ->
                 claim_button.setStyle("-fx-background-color: linear-gradient(#ffb366, #ff5050);" +
-                        "-fx-text-fill: black;" +
+                        "-fx-font-family: Tahoma;" +
+                        "-fx-font-size: 11px;" +
+                        "-fx-font-weight: bold;" +
                         "-fx-border-radius: 10;" +
                         "-fx-background-radius: 10;")
         );
@@ -120,7 +127,6 @@ public class HelloController {
         hbox_voucher.getChildren().addAll(imageView, details_box,spacer, claim_button);
 
         VBox vbox_voucher = new VBox();
-//        vbox_voucher.setSpacing(10);
         vbox_voucher.setPrefHeight(90);
         vbox_voucher.setAlignment(Pos.CENTER);
         vbox_voucher.setStyle("-fx-border-color: #cccccc;" +
@@ -131,7 +137,7 @@ public class HelloController {
         vbox_voucher.getChildren().add(hbox_voucher);
 
         claim_button.setOnAction(event -> {
-            boolean success = db.redeemVoucher(conn, 1, voucher.getVoucherId(), DBNAME, USERNAME, PASSWORD);
+            boolean success = db.redeemVoucher(conn, 1, voucher.getVoucherId());
             current_points.setText(db.read_points(conn,"user_points", 1));
 
             if (success) {
@@ -153,6 +159,7 @@ public class HelloController {
         return vbox_voucher;
     }
 
+    // Function to display transaction by using gridPane
     @FXML
     private GridPane gridPane2;
     private void display_transactions() {
@@ -174,6 +181,10 @@ public class HelloController {
         }
     }
 
+    // Function to create HBox for each transaction
+    // One Hbox for each transaction
+    // Every new transaction will be automatically updated to the display
+
     private HBox createTransactionBox(Transaction transaction) {
         VBox details_box = new VBox();
         details_box.setPadding(new Insets(5));
@@ -188,13 +199,13 @@ public class HelloController {
         details_box.getChildren().addAll(nameLabel, dateLabel);
 
         Label earned = new Label("+" + Integer.toString(transaction.getPoints_earned()));
-        earned.setStyle("-fx-font-size: 20px;" + "-fx-alignment: center;" + "-fx-font-family: Tahoma;");
+        earned.setStyle("-fx-font-size: 18px;" + "-fx-alignment: center;" + "-fx-font-family: Tahoma;");
         earned.setPrefWidth(40);
         HBox.setMargin(earned, new Insets(10, 0, 0,0));
 
 
         Label spent = new Label( "-" + Integer.toString(transaction.getPoints_spent()));
-        spent.setStyle("-fx-font-size: 20px;" + "-fx-alignment:  center;" + "-fx-font-family: Tahoma;");
+        spent.setStyle("-fx-font-size: 18px;" + "-fx-alignment:  center;" + "-fx-font-family: Tahoma;");
         spent.setPrefWidth(50);
         HBox.setMargin(spent, new Insets(10, 10, 0, 0));
 
@@ -214,19 +225,21 @@ public class HelloController {
     @FXML
     private Button checkInButton;
 
+    // Function for check in button
     @FXML
     protected void checkedInClick() {
         checkInButton.setText("Checked In");
         checkInButton.setDisable(true);
 
-        db.addPoints(conn,1, DBNAME, USERNAME, PASSWORD);
+        db.addPoints(conn,1);
         current_points.setText(db.read_points(conn,"user_points", 1));
+
         // Call the method to schedule enabling the button at midnight
         scheduleMidnightEnable();
         display_transactions();
-        // call the db function that
     }
 
+    // Disable the button once the user check in for the day and will only enable again at midnight
     private void scheduleMidnightEnable() {
         // Get the current time in milliseconds
         long currentTimeMillis = System.currentTimeMillis();
@@ -255,27 +268,6 @@ public class HelloController {
 
         // Calculate the difference between now and midnight
         return calendar.getTimeInMillis() - currentTimeMillis;
-    }
-
-    @FXML
-    protected void onVoucherClick (MouseEvent event) {
-
-        // check first if they have enough points to claim the voucher
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Claim Voucher");
-        alert.setHeaderText("Do you want to claim this voucher?");
-        alert.setContentText("You are about to claim the voucher");
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                claimVoucher();
-            }
-        });
-    }
-
-    private void claimVoucher() {
-        System.out.println("Voucher claimed successfully!");
     }
 
 }
