@@ -24,7 +24,7 @@ public class HelloController {
     // Credentials needed to establish connection with database
     String DBNAME = "gamification";
     String USERNAME = "postgres";
-    String PASSWORD = "5133";
+    String PASSWORD = "fullstack24";
 
     @FXML
     public void initialize() {
